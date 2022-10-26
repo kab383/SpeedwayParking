@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace SpeedwayParking.WebMVC.Data
+namespace SpeedwayParking.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

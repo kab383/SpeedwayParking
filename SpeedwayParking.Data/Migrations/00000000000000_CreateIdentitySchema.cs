@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace SpeedwayParking.WebMVC.Data.Migrations
+namespace SpeedwayParking.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

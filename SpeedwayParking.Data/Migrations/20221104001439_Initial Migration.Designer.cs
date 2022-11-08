@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpeedwayParking.Data;
 
 #nullable disable
 
-namespace SpeedwayParking.WebMVC.Data.Migrations
+namespace SpeedwayParking.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221104001439_Initial Migration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,186 +226,6 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SpeedwayParking.Data.Event", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DateEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.EventLot", b =>
-                {
-                    b.Property<int>("LotId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("DailyParking")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Electricity30a")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Electricity50a")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("NumberOfAdaSpaces")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfAutoSpaces")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfMotorcycleSpaces")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfRvSpaces")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("OvernightParking")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Shower")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Tailgating")
-                        .HasColumnType("bit");
-
-                    b.HasKey("LotId", "EventId");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("LotId")
-                        .IsUnique();
-
-                    b.ToTable("EventLots");
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.Lot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Entrance")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surface")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Lots");
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.LotStandardConfig", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("NumberOfAdaSpaces")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfAutoSpaces")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfMotorcycleSpaces")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfRvSpaces")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LotStandardConfigs");
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.Ticket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DateOfSale")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Event")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Lot")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LotId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("Purchased")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("WishlistUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WishlistUserId");
-
-                    b.ToTable("Tickets");
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.Wishlist", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Wishlists");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -453,43 +275,6 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.EventLot", b =>
-                {
-                    b.HasOne("SpeedwayParking.Data.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SpeedwayParking.Data.Lot", "Lot")
-                        .WithOne("EventLotConfig")
-                        .HasForeignKey("SpeedwayParking.Data.EventLot", "LotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-
-                    b.Navigation("Lot");
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.Ticket", b =>
-                {
-                    b.HasOne("SpeedwayParking.Data.Wishlist", null)
-                        .WithMany("TicketList")
-                        .HasForeignKey("WishlistUserId");
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.Lot", b =>
-                {
-                    b.Navigation("EventLotConfig")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SpeedwayParking.Data.Wishlist", b =>
-                {
-                    b.Navigation("TicketList");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<ILotService, LotService>();
 builder.Services.AddScoped<ILotStandardConfigService, LotStandardConfigService>();
 builder.Services.AddScoped<IEventLotService, EventLotService>();
 

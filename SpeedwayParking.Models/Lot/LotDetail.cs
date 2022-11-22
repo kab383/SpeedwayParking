@@ -17,9 +17,13 @@ namespace SpeedwayParking.Models.Lot
         public string Entrance { get; set; }
         [Display(Name = "Ground Surface")]
         public string Surface { get; set; }
-        //[Display(Name = "List of events this lot is used for")]
-        //public virtual List<EventLot> EventLots { get; set; }
-        //[Display(Name = "Standard lot attributes and available parking spaces:")]
-        //public virtual LotStandardConfig LotStandardConfig { get; set; }
+        [Display(Name = "Standard number of auto spaces for this lot")]
+        public int NumberOfAutoSpaces { get; set; }
+        [Display(Name = "Standard number of RV spaces for this lot")]
+        public int NumberOfRvSpaces { get; set; }
+        [Display(Name = "Standard number of Motorcycle spaces for this lot")]
+        public int NumberOfMotorcycleSpaces { get; set; }
+        [Display(Name = "Standard number of ADA spaces for this lot")]
+        public int NumberOfAdaSpaces { get; set; }
     }
 }

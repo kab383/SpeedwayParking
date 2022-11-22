@@ -5,10 +5,12 @@ namespace SpeedwayParking.Services
 {
     public interface ILotStandardConfigService
     {
-        Task<List<LotStandardConfigIndex>> GetAllLotStandardConfigsAsync();
-        Task<bool> CreateLotStandardConfigAsync(LotStandardConfigCreate model);
-        Task<bool> DeleteLotStandardConfigAsync(int id);
-        Task<bool> EditLotStandardConfigAsync(LotStandardConfigEdit model);
-        Task<LotStandardConfig> GetLotStandardConfigByIdAsync(int? id);
+        IEnumerable<LotStandardConfigIndex> GetAllLotStandardConfigs();
+        bool CreateLotStandardConfig(LotStandardConfigCreate model);
+        LotStandardConfig GetLotStandardConfigById(int? id);
+        IEnumerable<LotStandardConfig> GetAllLotStandardConfigsById(int id)
+        bool EditLotStandardConfig(LotStandardConfigEdit model);
+        bool DeleteLotStandardConfig(int id);
+        
     }
 }

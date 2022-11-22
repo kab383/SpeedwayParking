@@ -13,9 +13,9 @@ namespace SpeedwayParking.Contracts
     public interface IEventService
     {
         IEnumerable<EventIndex> GetAllEvents();
-        Task<int?> CreateEventAsync(EventCreate model);
-        Task<EventDetails> GetEventByIdAsync(int id);
-        Task<bool> EditEventAsync(EventEdit model);
-        //Task<bool> DeleteEventAsync(int id);
+        int? CreateEvent(EventCreate model);
+        EventDetails GetEventById(int id);
+        bool EditEvent(EventEdit model);
+        bool DeleteEvent(int id);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SpeedwayParking.Contracts;
 using SpeedwayParking.Data;
 using SpeedwayParking.Models.Event;
+using SpeedwayParking.Models.Lot;
 using SpeedwayParking.Models.LotStandardConfig;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,9 @@ namespace SpeedwayParking.Services
         }
 
         // Create a LotStandardConfig Index to use in the for each loop.
-        public async Task<List<LotStandardConfigIndex>> GetAllLotStandardConfigsAsync()
+        public IEnumerable<LotStandardConfigIndex> GetAllLotStandardConfigs()
         {
-            var lotStandardConfigEntity = await _context
+            var lotStandardConfigEntity = _context
                 .LotStandardConfigs
                 .Select(e => new LotStandardConfigIndex
                 {
@@ -33,13 +34,13 @@ namespace SpeedwayParking.Services
                     NumberOfMotorcycleSpaces = e.NumberOfMotorcycleSpaces,
                     NumberOfAdaSpaces = e.NumberOfAdaSpaces,
                 })
-                .ToListAsync();
+                .ToList();
             return lotStandardConfigEntity;
         }
 
-        public async Task<bool> CreateLotStandardConfigAsync(LotStandardConfigCreate model)
+        public bool CreateLotStandardConfig(LotStandardConfigCreate model)
         {
-            if (_context.Lots.FindAsync(model.Id) == null)
+            if (_context.Lots.Find(model.Id) == null)
             {
                 return false;
             }
@@ -53,12 +54,12 @@ namespace SpeedwayParking.Services
                     NumberOfAdaSpaces = model.NumberOfAdaSpaces
                 };
             _context.LotStandardConfigs.Add(createEntity);
-            return (await _context.SaveChangesAsync() == 1) ? true : false;
+            return _context.SaveChanges() == 1;
         }
 
-        public async Task<LotStandardConfig> GetLotStandardConfigByIdAsync(int? id)
+        public LotStandardConfig GetLotStandardConfigById(int? id)
         {
-            var entity = await _context.LotStandardConfigs.FindAsync(id);
+            var entity = _context.LotStandardConfigs.Find(id);
             if (entity == null)
                 return null;
             LotStandardConfig lotStandardConfigDetails = new LotStandardConfig()
@@ -71,9 +72,26 @@ namespace SpeedwayParking.Services
             return lotStandardConfigDetails;
         }
 
-        public async Task<bool> EditLotStandardConfigAsync(LotStandardConfigEdit model)
+        public IEnumerable<LotStandardConfig> GetAllLotStandardConfigsById(int id)
         {
-            var editEntity = await _context.LotStandardConfigs.FindAsync(model.Id);
+            var lotStandardConfigEntity = _context
+                .LotStandardConfigs
+                .Select(e => new LotStandardConfig
+                {
+                    Id = e.Id,
+                    NumberOfAutoSpaces = e.NumberOfAutoSpaces,
+                    NumberOfRvSpaces = e.NumberOfRvSpaces,
+                    NumberOfMotorcycleSpaces = e.NumberOfMotorcycleSpaces,
+                    NumberOfAdaSpaces = e.NumberOfAdaSpaces
+                })
+                .ToList();
+            return lotStandardConfigEntity;
+
+        }
+
+        public bool EditLotStandardConfig(LotStandardConfigEdit model)
+        {
+            var editEntity = _context.LotStandardConfigs.Find(model.Id);
             if (editEntity?.Id != model.Id)
                 return false;
 
@@ -82,17 +100,17 @@ namespace SpeedwayParking.Services
             editEntity.NumberOfMotorcycleSpaces = model.NumberOfMotorcycleSpaces;
             editEntity.NumberOfAdaSpaces = model.NumberOfAdaSpaces;
 
-            return (await _context.SaveChangesAsync() == 1) ? true : false;
+            return _context.SaveChanges() == 1;
         }
 
-        public async Task<bool> DeleteLotStandardConfigAsync(int id)
+        public bool DeleteLotStandardConfig(int id)
         {
             var deleteEntity = _context.LotStandardConfigs
                 .Single(e => e.Id == id);
 
             _context.LotStandardConfigs.Remove(deleteEntity);
 
-            return (await _context.SaveChangesAsync() == 1) ? true : false;
+            return _context.SaveChanges() == 1;
         }
     }
 }

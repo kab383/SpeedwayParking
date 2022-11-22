@@ -19,7 +19,7 @@ namespace SpeedwayParking.Services
             _context = context;
         }
 
-        public async Task<bool> CreateLotAsync(LotCreate model)
+        public bool CreateLot(LotCreate model)
         {
             var createEntity =
                 new Lot()
@@ -29,12 +29,12 @@ namespace SpeedwayParking.Services
                     Surface = model.Surface
                 };
             _context.Lots.Add(createEntity);
-            return await _context.SaveChangesAsync() == 1 ? true : false;
+            return _context.SaveChanges() == 1 ? true : false;
         }
 
-        public async Task<List<LotIndex>> GetAllLots()
+        public IEnumerable<LotIndex> GetAllLots()
         {
-            var lots = await _context
+            var lots = _context
                 .Lots
                 .Select(e => new LotIndex
                 {
@@ -43,11 +43,46 @@ namespace SpeedwayParking.Services
                     Entrance = e.Entrance,
                     Surface = e.Surface
                 })
-                .ToListAsync();
+                .ToList();
             return lots;
         }
+        
+        public LotDetail GetLotById(int id)
+        {
+            var entity = _context
+               .Lots
+               .Single(e => e.Id == id);
+            var lotEntity =
+                new LotDetail
+                {
+                    Id = entity.Id,
+                    Entrance = entity.Entrance,
+                    Surface = entity.Surface,
 
-        public async Task<bool> EditLotByIdAsync(LotEdit model)
+                };
+            return lotEntity;
+        }
+
+        public LotDetail GetLotByIdWithLotStandardConfig(int id)
+        {
+            var entity = _context.Lots.Include(r => r.LotStandardConfiguration).FirstOrDefault(e => e.Id == id);
+
+            if (entity == null)
+                return null;
+
+            var lotDetail = new LotDetail
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Entrance = entity.Entrance,
+                Surface = entity.Surface,
+                //NumberOfAutoSpaces = entity.LotStandardConfiguration.
+            };
+
+            return lotDetail;
+        }
+
+        public bool EditLot(LotEdit model)
         {
             var editEntity = _context
                     .Lots
@@ -57,14 +92,18 @@ namespace SpeedwayParking.Services
             editEntity.Entrance = model.Entrance;
             editEntity.Surface = model.Surface;
 
-            return await _context.SaveChangesAsync() == 1 ? true : false;
+            return _context.SaveChanges() == 1 ? true : false;
         }
 
-        public async Task<bool> DeleteLotById(int Id)
+        public bool DeleteLot(int id)
         {
-            var deleteEntity = await _context.Lots.FindAsync(Id);
+            var deleteEntity = _context
+                .Lots
+                .Single(e => e.Id == id);
+
             _context.Lots.Remove(deleteEntity);
-            return await _context.SaveChangesAsync() == 1 ? true : false;
+
+            return _context.SaveChanges() == 1 ? true : false;
         }
     }
 }

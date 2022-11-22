@@ -23,7 +23,7 @@ namespace SpeedwayParking.Services
         }
 
         //admin only feature
-        public async Task<int?> CreateEventAsync(EventCreate model)
+        public int? CreateEvent(EventCreate model)
         {
             var eventEntity =
                 new Event()
@@ -41,16 +41,14 @@ namespace SpeedwayParking.Services
             return null;
         }
 
-        public async Task<EventDetails> GetEventByIdAsync(int Id)
+        public EventDetails GetEventById(int id)
         {
-            var eventEntity = await _context
+            var eventEntity = _context
                 .Events
-                .FirstOrDefaultAsync(e => e.Id == Id);
+                .Single(e => e.Id == id);
 
-            if (eventEntity == null)
-                return null;
-
-            var eventDetails = new EventDetails
+            return
+                new EventDetails
             {
                 Id = eventEntity.Id,
                 Name = eventEntity.Name,
@@ -58,7 +56,6 @@ namespace SpeedwayParking.Services
                 DateStart = eventEntity.DateStart,
                 DateEnd = eventEntity.DateEnd
             };
-            return eventDetails;
         }
 
         public IEnumerable<EventIndex> GetAllEvents()
@@ -77,22 +74,25 @@ namespace SpeedwayParking.Services
                 return eventEntity;
         }
 
-        public async Task<bool> EditEventAsync(EventEdit model)
+        public bool EditEvent(EventEdit model)
         {
-            var eventEntity = await _context.Events.FindAsync(model.Id);
-            if (eventEntity?.Id != model.Id)
-                return false;
+            var eventEntity = _context.Events.Single(e => e.Id == model.Id);
 
             eventEntity.Name = model.Name;
             eventEntity.Location = model.Location;
             eventEntity.DateStart = model.DateStart;
             eventEntity.DateEnd = model.DateEnd;
 
-            var eventEdits = await _context.SaveChangesAsync();
-            return eventEdits == 1;
+            return _context.SaveChanges() == 1;
         }
 
+        public bool DeleteEvent(int id)
+        {
+            var deleteEntity = _context.Events.Single(e => e.Id == id);
 
+            _context.Events.Remove(deleteEntity);
 
+            return _context.SaveChanges() == 1;
+        }
     }
 }

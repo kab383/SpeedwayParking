@@ -24,12 +24,13 @@ namespace SpeedwayParking.WebMVC.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(_eventService.GetAllEvents());
+            var events = _eventService.GetAllEvents();
+            return View(events);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -64,17 +65,17 @@ namespace SpeedwayParking.WebMVC.Controllers
         //    return View(model);
         //}
 
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
-            var model = _eventService.GetEventByIdAsync(id);
+            var model = _eventService.GetEventById(id);
             return View(model);
         }
 
         // NULL REFERENCE?
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
             var service = _eventService;
-            var detail = await service.GetEventByIdAsync(id);
+            var detail = service.GetEventById(id);
             var model =
                 new EventEdit
                 {
@@ -89,7 +90,7 @@ namespace SpeedwayParking.WebMVC.Controllers
 
         [HttpPut]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, EventEdit model)
+        public IActionResult Edit(int id, EventEdit model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -100,7 +101,7 @@ namespace SpeedwayParking.WebMVC.Controllers
             }
 
             var service = _eventService;
-            if (await service.EditEventAsync(model))
+            if (service.EditEvent(model))
             {
                 TempData["SaveResult"] = "The event has been updated.";
                 return RedirectToAction("Index");
@@ -110,40 +111,25 @@ namespace SpeedwayParking.WebMVC.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Name,Location,DateStart,DateEnd")] EventEdit model)
-        //{
-        //    var eventitem = await _context.Events.FindAsync(id);
-        //    if (eventitem == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        eventitem.Name = model.Name;
-        //        eventitem.Location = model.Location;
-        //        eventitem.DateStart = model.DateStart;
-        //        eventitem.DateEnd = model.DateEnd;
-        //        try
-        //        {
-        //            _context.Update(eventitem);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch
-        //        {
-        //            //if (eventitem.Id != id))
-        //            //{
-        //            //    return NotFound();
-        //            //}
-        //            //else
-        //            //{
-        //            //    throw;
-        //            //}
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(eventitem);
-        //}
+        [ActionName("Delete")]
+        public IActionResult Delete(int id)
+        {
+            var model = _eventService.GetEventById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = _eventService;
+
+            service.DeleteEvent(id);
+
+            TempData["SaveResult"] = "The event has been deleted."; 
+
+            return RedirectToAction("Index");
+        }
     }
 }

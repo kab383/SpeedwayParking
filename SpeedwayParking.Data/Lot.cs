@@ -17,7 +17,7 @@ namespace SpeedwayParking.Data
         public string Entrance { get; set; }
         [Required]
         public string Surface { get; set; }
-        public virtual List<EventLot> EventLots { get; set; }
-        public virtual LotStandardConfig LotStandardConfig { get; set; }
+        public virtual List<EventLot> EventLotInfo { get; set; } = new List<EventLot>();
+        public virtual List<LotStandardConfig> LotStandardConfiguration { get; set; } = new List<LotStandardConfig>();
     }
 }

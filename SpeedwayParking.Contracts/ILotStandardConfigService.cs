@@ -11,6 +11,5 @@ namespace SpeedwayParking.Services
         IEnumerable<LotStandardConfig> GetAllLotStandardConfigsById(int id);
         bool EditLotStandardConfig(LotStandardConfigEdit model);
         bool DeleteLotStandardConfig(int id);
-        
     }
 }

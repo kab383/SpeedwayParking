@@ -1,13 +1,13 @@
-﻿@model IEnumerable<SpeedwayParking.Models.Event.EventIndex>
+﻿@model IEnumerable<SpeedwayParking.Models.LotStandardConfig.LotStandardConfigIndex>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Events</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New Event</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -16,16 +16,16 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.NumberOfAutoSpaces)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
+                @Html.DisplayNameFor(model => model.NumberOfRvSpaces)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateStart)
+                @Html.DisplayNameFor(model => model.NumberOfMotorcycleSpaces)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateEnd)
+                @Html.DisplayNameFor(model => model.NumberOfAdaSpaces)
             </th>
             <th></th>
         </tr>
@@ -37,16 +37,16 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.NumberOfAutoSpaces)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location)
+                @Html.DisplayFor(modelItem => item.NumberOfRvSpaces)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateStart)
+                @Html.DisplayFor(modelItem => item.NumberOfMotorcycleSpaces)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateEnd)
+                @Html.DisplayFor(modelItem => item.NumberOfAdaSpaces)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |

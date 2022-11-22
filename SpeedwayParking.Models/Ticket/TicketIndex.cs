@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeedwayParking.Data
+namespace SpeedwayParking.Models.Ticket
 {
-    public class Ticket
+    public class TicketIndex
     {
-        [Key]
         public int Id { get; set; }
         public Guid UserId { get; set; }
         // Default value of booleans are false in C#, so when ticket is created the Purchased bool is already false.
@@ -27,6 +26,6 @@ namespace SpeedwayParking.Data
         public int LotId { get; set; }
         [Required]
         public int EventId { get; set; }
-        public virtual Event EventInfo { get; set; }
+        //public virtual Event EventInfo { get; set; }
     }
 }

@@ -21,12 +21,12 @@ namespace SpeedwayParking.Models.Event
         [Display(Name = "Start Date")]
         [Required(ErrorMessage = "Event start date is required.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy")]
+        [DisplayFormat(DataFormatString = "{0:d")]
         public DateTime DateStart { get; set; }
         [Display(Name = "End Date")]
         [Required(ErrorMessage = "Event end date is required.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy")]
+        [DisplayFormat(DataFormatString = "{0:d")]
         public DateTime DateEnd { get; set; }
     }
 }

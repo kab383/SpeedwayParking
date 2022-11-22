@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SpeedwayParking.Contracts\SpeedwayParking.Contracts.csproj" />
+    <ProjectReference Include="..\SpeedwayParking.Data\SpeedwayParking.Data.csproj" />
+    <ProjectReference Include="..\SpeedwayParking.Models\SpeedwayParking.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace SpeedwayParking.Data
@@ -19,6 +20,7 @@ namespace SpeedwayParking.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Creates a compound key in EventLot using LotId and EventId with fluent API.
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<EventLot>().HasKey(e => new { e.LotId, e.EventId });
         }

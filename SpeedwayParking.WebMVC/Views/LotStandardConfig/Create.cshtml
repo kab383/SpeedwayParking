@@ -1,0 +1,47 @@
+﻿@model SpeedwayParking.Models.LotStandardConfig.LotStandardConfigCreate
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>LotStandardConfigCreate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="NumberOfAutoSpaces" class="control-label"></label>
+                <input asp-for="NumberOfAutoSpaces" class="form-control" />
+                <span asp-validation-for="NumberOfAutoSpaces" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfRvSpaces" class="control-label"></label>
+                <input asp-for="NumberOfRvSpaces" class="form-control" />
+                <span asp-validation-for="NumberOfRvSpaces" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfMotorcycleSpaces" class="control-label"></label>
+                <input asp-for="NumberOfMotorcycleSpaces" class="form-control" />
+                <span asp-validation-for="NumberOfMotorcycleSpaces" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfAdaSpaces" class="control-label"></label>
+                <input asp-for="NumberOfAdaSpaces" class="form-control" />
+                <span asp-validation-for="NumberOfAdaSpaces" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

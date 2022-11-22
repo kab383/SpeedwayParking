@@ -5,19 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeedwayParking.Data
+namespace SpeedwayParking.Models.Lot
 {
-    public class Lot
+    public class LotIndex
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
+        [Display(Name = "Lot Name")]
         public string Name { get; set; }
-        [Required]
+        [Display(Name = "Nearest Lot Entrance")]
         public string Entrance { get; set; }
-        [Required]
+        [Display(Name = "Ground Surface")]
         public string Surface { get; set; }
-        public virtual List<EventLot> EventLots { get; set; }
-        public virtual LotStandardConfig LotStandardConfig { get; set; }
     }
 }

@@ -248,7 +248,7 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("SpeedwayParking.Data.EventLot", b =>
@@ -296,7 +296,7 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
                     b.HasIndex("LotId")
                         .IsUnique();
 
-                    b.ToTable("EventLots");
+                    b.ToTable("EventLots", (string)null);
                 });
 
             modelBuilder.Entity("SpeedwayParking.Data.Lot", b =>
@@ -321,7 +321,7 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lots");
+                    b.ToTable("Lots", (string)null);
                 });
 
             modelBuilder.Entity("SpeedwayParking.Data.LotStandardConfig", b =>
@@ -346,7 +346,7 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LotStandardConfigs");
+                    b.ToTable("LotStandardConfigs", (string)null);
                 });
 
             modelBuilder.Entity("SpeedwayParking.Data.Ticket", b =>
@@ -390,7 +390,7 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
 
                     b.HasIndex("WishlistUserId");
 
-                    b.ToTable("Tickets");
+                    b.ToTable("Tickets", (string)null);
                 });
 
             modelBuilder.Entity("SpeedwayParking.Data.Wishlist", b =>
@@ -401,7 +401,7 @@ namespace SpeedwayParking.WebMVC.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Wishlists");
+                    b.ToTable("Wishlists", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

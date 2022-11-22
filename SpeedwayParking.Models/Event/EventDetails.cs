@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpeedwayParking.Models.Event
 {
-    public class EventListItem
+    public class EventDetails
     {
         public int Id { get; set; }
         public string Name { get; set; }

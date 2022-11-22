@@ -8,7 +8,7 @@ namespace SpeedwayParking.Services
         IEnumerable<LotStandardConfigIndex> GetAllLotStandardConfigs();
         bool CreateLotStandardConfig(LotStandardConfigCreate model);
         LotStandardConfig GetLotStandardConfigById(int? id);
-        IEnumerable<LotStandardConfig> GetAllLotStandardConfigsById(int id)
+        IEnumerable<LotStandardConfig> GetAllLotStandardConfigsById(int id);
         bool EditLotStandardConfig(LotStandardConfigEdit model);
         bool DeleteLotStandardConfig(int id);
         
